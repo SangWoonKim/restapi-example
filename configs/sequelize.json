@@ -1,0 +1,27 @@
+
+{
+  "development": {
+    "username": "root",
+    "password": "spdlqjek5",
+    "database": "prac_dev",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 3307
+  },
+  "test": {
+    "username": "root",
+    "password": "spdlqjek5",
+    "database": "prac_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 3307
+  },
+  "production": {
+    "username": "root",
+    "password": "spdlqjek5",
+    "database": "prac_prod",
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "port": 3307
+  }
+}
