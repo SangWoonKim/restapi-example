@@ -1,4 +1,5 @@
 //localhost:3000/v1/users
+//이렇게 라우팅을 나눈 이유는 예제할 때 편하게 하려고
 const express = require('express');
 const router = express.Router();
 const controller = require('../../controller/v1/user.controller')
@@ -7,5 +8,10 @@ router.route('/').get(controller.get);                                       //�
 
 router.route('/index').get(controller.index);
 
+router.route('/create').post(controller.create);
+
+router.route('/update/:nickname/:nicknameParam').put(controller.update);
+
+router.route('/delete/:nickname').delete(controller.delete);
 
 module.exports = router;                                    
