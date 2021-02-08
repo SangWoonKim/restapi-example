@@ -14,4 +14,7 @@ router.route('/update/:nickname/:nicknameParam').put(controller.update);
 
 router.route('/delete/:nickname').delete(controller.delete);
 
+router.route('/index/:id').get(controller.selectOne);
+
+router.route('/update/:nickname/:nicknameParam').patch(controller.update);
 module.exports = router;                                    

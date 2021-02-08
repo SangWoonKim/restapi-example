@@ -40,15 +40,29 @@ module.exports.index = async (req, res) => {
     };
 };
 
+//id값을 받아 데이터 검색
+module.exports.selectOne = (req, res) => {
+    const id = req.params.id;
+
+
+    try {
+        usermodels.findByPk(id).then(result => {
+            res.json(result);
+        })
+    } catch (err) {
+        return res.status(404).json({ err: 'import확인' });
+    }
+}
+
 //create(insert) nickname과 password insert
-module.exports.create = (req,res)=>{
+module.exports.create = (req, res) => {
     //NULL값 검사
-    if(!req.body.nickname){
+    if (!req.body.nickname) {
         res.status(400).json({
-            '에러':'nickname을 입력하세요'
+            '에러': 'nickname을 입력하세요'
         });
         return;
-    }else if(!req.body.password){
+    } else if (!req.body.password) {
         res.status(400).json({
             '에러': 'password을 입력하세요'
         })
@@ -59,13 +73,13 @@ module.exports.create = (req,res)=>{
         nickname: req.body.nickname,
         password: req.body.password
     };
-    
+
     //요청받은 데이터 DB에 추가 삽입 시점
-    usermodels.create(Userdata).then(result =>{
-            res.json(result);
-            console.log(result);
-        })
-        .catch(err=>{
+    usermodels.create(Userdata).then(result => {
+        res.json(result);
+        console.log(result);
+    })
+        .catch(err => {
             res.status(500).json({
                 '에러내용': 'db에 추가되지 않았습니다'
             });
@@ -73,42 +87,57 @@ module.exports.create = (req,res)=>{
 };
 
 //update nickname값 받고, 해당 데이터 갱신
-module.exports.update = (req,res)=>{
+module.exports.update = (req, res) => {
     //라우터의 쿼리스트링에서 받은 값 추출(params)하여 저장
     const nickname = req.params.nickname
     const nicknameParam = req.params.nicknameParam;
-    
+
     console.log(nickname);
     console.log(nicknameParam);
 
     //갱신 시점 if문을 추가하여 중복시 에러코드 발생하는 루틴 삽입해야함
-    usermodels.update({nickname : nicknameParam},   //set
-        {where:{nickname: nickname}                 //where
-    }).then(resultRowNum=>{
-        res.json({
-            '성공':` ${nickname}에서${nicknameParam}으로 갱신 성공`,
-            '갱신한 행의 개수':`${resultRowNum}개의 행이 업데이트`
-        });
-    }).catch(err=>{
-        res.status(500).json({
-            '실패':'업데이트 실패'
+    usermodels.update({ nickname: nicknameParam },   //set
+        {
+            where: { nickname: nickname }                 //where
         })
-    })
+        //update의 반환값을 바뀐행이 아닌 바뀐행의 정보를 나타내게 함
+        .then(() => {
+            return usermodels.findOne({ where: { nickname: nicknameParam } })
+                .then(result => res.json(result))
+                .catch(err => {
+                    res.status(500).json({
+                        '실패': '정보조회 실패'
+                    })
+                })
+        })
+        // .then(resultRowNum=>{
+        //     res.json({
+
+        //         '성공':` ${nickname}에서${nicknameParam}으로 갱신 성공`,
+        //         '갱신한 행의 개수':`${resultRowNum}개의 행이 업데이트`
+        //     });
+        // }
+        // )
+        .catch(err => {
+            res.status(500).json({
+                '실패': '업데이트 실패'
+            })
+        })
 };
 
 
 //delete nickname값으로 데이터 삭제
-module.exports.delete = (req,res)=>{
+module.exports.delete = (req, res) => {
     //라우터의 쿼리스트링에서 받은 값 추출(params)하여 저장
     const nicknameParam = req.params.nickname;
-    
+
     //삭제 시점 if문을 추가하여 중복시 에러코드 발생하는 루틴 삽입해야함
     usermodels.destroy({
-        where:{nickname:nicknameParam}
-    }).then(resultRowNum=>{
+        where: { nickname: nicknameParam }
+    }).then(resultRowNum => {
         res.json({
-            '성공':`${nicknameParam}의 nickname삭제`,
-            '삭제한 행의 개수':`${resultRowNum}개의 행 삭제`
+            '성공': `${nicknameParam}의 nickname삭제`,
+            '삭제한 행의 개수': `${resultRowNum}개의 행 삭제`
         });
     });
 };
