@@ -141,3 +141,18 @@ module.exports.delete = (req, res) => {
         });
     });
 };
+
+// module.exports.login_id = (req, res) => {
+//     const nicknameParam = req.params.nickname;
+//     const passwordParam = req.params.password;
+//     //select*from users where (nickname,password) IN(Nparam,PParam)
+//     try {
+//         usermodels.findByPk(id).then(result => {
+//             res.json(result);
+//         })
+//     } catch (err) {
+//         return res.status(404).json({ err: 'import확인' });
+//     }
+// }
+
+

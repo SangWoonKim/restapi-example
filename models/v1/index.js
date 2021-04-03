@@ -11,7 +11,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../../configs/sequelize.json')[env];
-
+//db객체 생성
 const db = {};
 
 let sequelize;
@@ -48,5 +48,6 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.usermodels = require("./user.model.js")(sequelize,Sequelize.DataTypes);
+db.exercisemodels = require("./exercise.model.js")(sequelize,Sequelize.DataTypes);
 
 module.exports = db;

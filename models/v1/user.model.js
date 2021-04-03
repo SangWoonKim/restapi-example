@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   User.prototype.toJSON = function(){
     const values = Object.assign({},this.get())
 
+    //id와 nickname만 출력
     return{
       id: values.id,
       nickname: values.nickname

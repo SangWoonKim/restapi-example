@@ -8,4 +8,5 @@ router.get('/',(req,res,next)=>{                            //자기자신을 �
 
 router.use('/users',require('./user.route'));                //ex) localhost:3000/v1/users일 경우 user.route.js를 실행
 
+router.use('/exercise',require("./exercise.route"))
 module.exports = router;                                    //모듈화
