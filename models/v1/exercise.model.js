@@ -47,9 +47,9 @@ module.exports = (sequelize, DataTypes) => {
       E_name: values.E_name,
       E_setcal: values.E_setcal,
       E_image: values.E_image,
-      E_imageOrg: values.E_imageorg,
-      E_activeImg: values.E_activeimg,
-      E_activeImg2: values.E_activeimg2,
+      E_imageorg: values.E_imageorg,
+      E_activeimg: values.E_activeimg,
+      E_activeimg2: values.E_activeimg2,
     }
   }
 
