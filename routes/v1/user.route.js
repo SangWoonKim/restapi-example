@@ -18,5 +18,5 @@ router.route('/index/:id').get(controller.selectOne);
 
 router.route('/update/:nickname/:nicknameParam').patch(controller.update);
 
-// router.route('/login').post(controller.login);
+router.route('/login').post(controller.login);
 module.exports = router;                                    

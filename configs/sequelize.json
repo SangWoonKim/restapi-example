@@ -7,7 +7,7 @@
     "database": "prac_dev",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3306
   },
   "test": {
     "username": "root",
@@ -15,7 +15,7 @@
     "database": "prac_test",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3306
   },
   "production": {
     "username": "root",
@@ -23,7 +23,7 @@
     "database": "prac_prod",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 3307
+    "port": 3306
   },"operatorAliases":false
   
 }

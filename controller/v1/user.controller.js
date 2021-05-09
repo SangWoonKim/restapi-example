@@ -142,17 +142,40 @@ module.exports.delete = (req, res) => {
     });
 };
 
-// module.exports.login_id = (req, res) => {
-//     const nicknameParam = req.params.nickname;
-//     const passwordParam = req.params.password;
-//     //select*from users where (nickname,password) IN(Nparam,PParam)
-//     try {
-//         usermodels.findByPk(id).then(result => {
-//             res.json(result);
-//         })
-//     } catch (err) {
-//         return res.status(404).json({ err: 'import확인' });
-//     }
-// }
 
+//로그인시 실행되는 구문
+module.exports.login = (req, res) => {
+    //Null check
+    if (!req.body.id) {
+        res.status(400).json({
+            '에러': 'id을 입력하세요'
+        });
+        return;
+    } else if (!req.body.nickname) {
+        res.status(400).json({
+            '에러': 'nickname을 입력하세요'
+        })
+    }
 
+    //요청받은 데이터 저장(body)
+    const Userdata = {
+        id: req.body.id,
+        nickname: req.body.nickname
+    };
+
+    //요청받은 데이터 DB에 조회 시점
+    usermodels.findOne({
+        where: {
+            id: Userdata.id,
+            nickname: Userdata.nickname
+        }
+    }).then(result => {
+        res.json(result);
+        console.log(result);
+    })
+        .catch(err => {
+            res.status(500).json({
+                '에러내용': 'id나 pw확인'
+            });
+        });
+}
